@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261125c">
+<link rel="stylesheet" href="css/style.css?v=20261126">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -53,9 +53,8 @@
 
   <!-- 신규 매장 -->
   <div class="marquee" aria-label="최근 문을 연 매장">
-    <div class="mq-track">
+    <div class="mq-track loop" data-speed="55">
       <span>구리휴게소점</span><span>이천휴게소점</span><span>마곡나루역점</span><span>부산시청점</span><span>원흥역점</span><span>이태원역점</span><span>노원역점</span><span>광교법조타운점</span>
-      <span aria-hidden="true">구리휴게소점</span><span aria-hidden="true">이천휴게소점</span><span aria-hidden="true">마곡나루역점</span><span aria-hidden="true">부산시청점</span><span aria-hidden="true">원흥역점</span><span aria-hidden="true">이태원역점</span><span aria-hidden="true">노원역점</span><span aria-hidden="true">광교법조타운점</span>
     </div>
   </div>
 
@@ -110,7 +109,7 @@
       <div>
         <h2>평균 매장의<br>한 달 수익 구조</h2>
         <p class="lead">13평 평균 매장 기준, 매출에서 비용을 빼고 남는 돈을 그대로 보여 드립니다.</p>
-        <div class="profit-big"><span>월 수익</span><b>530만 원</b><em>매출의 20%</em></div>
+        <div class="profit-big"><span>월 수익</span><b class="beat">530만 원</b><em>매출의 20%</em></div>
       </div>
       <div>
         <div class="bar" role="img" aria-label="월매출 2,650만 원 중 원재료비 38%, 인건비 20%, 임대료 12%, 기타 10%, 수익 20%">
@@ -204,8 +203,8 @@
       <h2>손님이 먼저<br>알아봅니다</h2>
       <p class="lead">배달 앱과 지도 앱에 손님들이 직접 남긴 리뷰입니다. 옆으로 넘겨 보세요.</p>
     </div>
-    <div class="reviews" tabindex="0" aria-label="손님 리뷰 모음">
-      <div class="rv-row">
+    <div class="reviews" aria-label="손님 리뷰 모음 (누르면 크게 보기)">
+      <div class="rv-row loop" data-speed="40">
         <img src="img/review/r01.webp" alt="손님 리뷰 1" width="292" height="403" loading="lazy">
         <img src="img/review/r02.webp" alt="손님 리뷰 2" width="292" height="403" loading="lazy">
         <img src="img/review/r03.webp" alt="손님 리뷰 3" width="292" height="403" loading="lazy">
@@ -218,7 +217,7 @@
         <img src="img/review/r10.webp" alt="손님 리뷰 10" width="292" height="403" loading="lazy">
         <img src="img/review/r11.webp" alt="손님 리뷰 11" width="292" height="403" loading="lazy">
       </div>
-      <div class="rv-row">
+      <div class="rv-row loop rev" data-speed="34">
         <img src="img/review/r12.webp" alt="손님 리뷰 12" width="292" height="330" loading="lazy">
         <img src="img/review/r13.webp" alt="손님 리뷰 13" width="292" height="330" loading="lazy">
         <img src="img/review/r14.webp" alt="손님 리뷰 14" width="292" height="330" loading="lazy">
@@ -343,7 +342,7 @@
         <h2>가까운 수유리우동집에서<br>먼저 맛보세요</h2>
         <p class="lead">서울·경기부터 부산·광주, 고속도로 휴게소까지. 상담 전에 직접 드셔 보시길 권합니다.</p>
       </div>
-      <a class="btn line" href="https://xn--2q1bl4i14hv0ds7aft04mzvf.com/#move5" target="_blank" rel="noopener noreferrer">전국 매장 지도 보기</a>
+      <a class="btn line pulse" href="https://xn--2q1bl4i14hv0ds7aft04mzvf.com/#move5" target="_blank" rel="noopener noreferrer">전국 매장 지도 보기</a>
     </div>
   </section>
 
@@ -366,7 +365,7 @@
         </tbody>
       </table>
       <div class="consult-cta">
-        <a href="#consult" class="btn primary js-kakao" id="kakao-cta">카카오톡 상담하기</a>
+        <a href="#consult" class="btn primary js-kakao pulse" id="kakao-cta">카카오톡 상담하기</a>
         <a href="tel:02-900-8805" class="btn line">02-900-8805 전화</a>
       </div>
       <p class="tiny consult-note">카카오톡 채팅방에서 희망 지역과 예산을 알려 주시면 담당자가 바로 답변드립니다.</p>
@@ -410,11 +409,13 @@
   </div>
 </footer>
 
+<dialog class="lb" aria-label="리뷰 크게 보기"><img src="img/review/r01.webp" alt="손님 리뷰 크게 보기"></dialog>
+
 <div class="dock" aria-hidden="true">
   <a href="tel:02-900-8805" class="btn line" tabindex="-1">전화</a>
   <a href="#consult" class="btn primary js-kakao" tabindex="-1">카카오톡 상담하기</a>
 </div>
 
-<script src="js/main.js?v=20261125b" defer></script>
+<script src="js/main.js?v=20261126" defer></script>
 </body>
 </html>

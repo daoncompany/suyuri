@@ -44,6 +44,33 @@ once($$('.odo'), el => $$('.d', el).forEach((d, i) => {
   d.style.transform = `translateY(-${d.dataset.n * 1.2}em)`
 }))
 
+// 끊김 없는 가로 루프(매장 띠·리뷰): 화면보다 넓어질 때까지 한 벌을 늘린 뒤 두 벌로 채움
+$$('.loop').forEach(t => {
+  const base = t.innerHTML
+  const fill = () => {
+    t.innerHTML = base
+    const w = t.scrollWidth || 1, n = Math.ceil(innerWidth * 1.1 / w)
+    const half = base.repeat(n)
+    t.innerHTML = half + half.replace(/<(span|img)\b/g, '<$1 aria-hidden="true"').replace(/alt="[^"]*"/g, 'alt=""')
+    t.style.setProperty('--dur', (w * n) / (+t.dataset.speed || 50) + 's')
+  }
+  fill()
+  addEventListener('load', fill)
+})
+
+// 리뷰 누르면 크게
+const lb = $('.lb')
+$('.reviews').addEventListener('click', e => {
+  if (e.target.tagName !== 'IMG') return
+  $('img', lb).src = e.target.src
+  lb.showModal()
+})
+lb.addEventListener('click', () => lb.close())
+
+// 순서대로 강조(쉬운 운영 가로선, 8단계)
+$$('.easy li').forEach((li, i) => li.style.setProperty('--i', i))
+$$('.steps li').forEach((li, i) => li.style.setProperty('--i', i))
+
 // 재료: 제자리에서 하나씩 tada
 $$('.tada').forEach((el, i) => el.style.setProperty('--i', i))
 once($$('.ing-grid'), g => $$('.tada', g).forEach(el => el.classList.add('in')))
@@ -72,7 +99,7 @@ const loop = (X, y, r, d, turns) => { // 세로로 내려가며 안쪽(왼쪽)�
   const n = 36 * turns
   for (let k = 1; k <= n; k++) {
     const t = k / n * Math.PI * 2 * turns
-    s += ` L${(X - d * (1 - Math.cos(t))).toFixed(1)} ${(y + r * t - d * Math.sin(t)).toFixed(1)}`
+    s += ` L${(X - d * (1 - Math.cos(t))).toFixed(1)} ${(y + r * t + d * Math.sin(t)).toFixed(1)}`
   }
   return { s, h: r * Math.PI * 2 * turns }
 }
@@ -88,12 +115,12 @@ const buildNoodle = () => {
   let d = `M${x} ${y0} C${x - 40} ${y0 + h * .5} ${X} ${y0 + h * .3} ${X} ${y1}`
   // 불투명 구간(재료·비용) 안에서는 꼬임이 가려지므로 그 아래로 미룸
   const solid = $$('.ing-sec, .cost-sec').map(rel)
-  const gap = innerHeight * 1.3, R = mob ? 4.5 : 6, D = mob ? 13 : 18
+  const gap = innerHeight * 1.3, R = mob ? 5 : 7, D = mob ? 12 : 17
   let y = y1 + gap * .6, n = 0
   while (y < turnY - 200) {
     const hit = solid.find(s => y > s.t - 80 && y < s.b)
     if (hit) { y = hit.b + 60; continue }
-    const L = loop(X, y, R, D, n % 2 ? 2 : 1)
+    const L = loop(X, y, R, D, n % 2 ? 3 : 2)
     if (y + L.h > turnY - 40) break
     d += ` L${X} ${y}${L.s}`
     y += L.h + gap; n++
@@ -108,7 +135,7 @@ const buildNoodle = () => {
 }
 
 // 스크롤에 따라 움직이는 것들
-const hero = $('.hero'), steps = $('.steps'), stepItems = $$('.steps li')
+const hero = $('.hero')
 const hd = $('.hd'), dock = $('.dock'), consult = $('#consult')
 const onScroll = () => {
   const vh = innerHeight
@@ -125,11 +152,6 @@ const onScroll = () => {
   // 하단 버튼: 첫 화면 지나면 올라오고, 마지막 상담 구간에서는 내려감
   dock.classList.toggle('on', hero.getBoundingClientRect().bottom < 0 && consult.getBoundingClientRect().top > vh * .6)
 
-  // 8단계 선 채우기
-  const sr = steps.getBoundingClientRect()
-  const p = clamp((vh * .7 - sr.top) / sr.height)
-  steps.style.setProperty('--fill', p)
-  stepItems.forEach((li, i) => li.classList.toggle('on', p >= i / stepItems.length))
 }
 let ticking = false
 addEventListener('scroll', () => {
