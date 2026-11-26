@@ -44,42 +44,77 @@ once($$('.odo'), el => $$('.d', el).forEach((d, i) => {
   d.style.transform = `translateY(-${d.dataset.n * 1.2}em)`
 }))
 
-// 재료 구간: 화면 고정 + 가로 넘김
-const ing = $('#ing'), track = $('.ing-track', ing)
-let travel = 0
-const sizeIng = () => {
-  if (calm) return
-  ing.classList.add('pin')
-  travel = Math.max(0, track.scrollWidth - innerWidth)
-  ing.style.setProperty('--travel', travel + 'px')
-}
+// 재료: 제자리에서 하나씩 tada
+$$('.tada').forEach((el, i) => el.style.setProperty('--i', i))
+once($$('.ing-grid'), g => $$('.tada', g).forEach(el => el.classList.add('in')))
 
-// 면발 한 가닥: 그릇 아래에서 짧게 휘어 오른쪽 가장자리로 간 뒤, 상담 폼까지 곧게 내려감
+// 카카오톡 상담하기: 채널 ID가 있으면 채팅방으로
+const kakaoUrl = KAKAO_CHANNEL && `https://pf.kakao.com/${KAKAO_CHANNEL}/chat`
+$$('.js-kakao').forEach(a => {
+  if (kakaoUrl) Object.assign(a, { href: kakaoUrl, target: '_blank', rel: 'noopener noreferrer' })
+  else if (a.id === 'kakao-cta') a.addEventListener('click', e => {
+    e.preventDefault()
+    $('.consult-note').textContent = '카카오톡 채널 연결 준비 중입니다. 02-900-8805로 전화 주시면 바로 상담해 드립니다.'
+  })
+})
+
+// 점주 인터뷰: 누를 때만 유튜브를 불러옴
+$$('.yt').forEach(b => b.addEventListener('click', () => {
+  b.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1" title="점주 인터뷰 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`
+}, { once: true }))
+
+// 면발 한 가닥: 그릇 아래에서 짧게 휘어 오른쪽 가장자리로 간 뒤 곧게 내려가며,
+// 화면 1.3개 높이마다 한 번씩 꼬였다가(고리/두 번 꼬임 번갈아) 카카오톡 상담 버튼에 닿음
 const main = $('main'), nsvg = $('.noodle'), npath = $('path', nsvg)
 let nTotal = 0, nSamples = []
+const loop = (X, y, r, d, turns) => { // 세로로 내려가며 안쪽(왼쪽)으로 고리를 그림
+  let s = ''
+  const n = 36 * turns
+  for (let k = 1; k <= n; k++) {
+    const t = k / n * Math.PI * 2 * turns
+    s += ` L${(X - d * (1 - Math.cos(t))).toFixed(1)} ${(y + r * t - d * Math.sin(t)).toFixed(1)}`
+  }
+  return { s, h: r * Math.PI * 2 * turns }
+}
 const buildNoodle = () => {
   const W = main.clientWidth, mTop = main.getBoundingClientRect().top
-  const b = $('.bowl img').getBoundingClientRect()
-  const X = W - (W < 768 ? 12 : Math.max(24, (W - 1120) / 2 - 8))
-  const x = b.left + b.width / 2, y0 = b.bottom - mTop - 24
-  const y1 = Math.min(y0 + 160, $('.marquee').getBoundingClientRect().top - mTop - 4), h = y1 - y0, end = $('#form h2').getBoundingClientRect().top - mTop + 20
-  const d = `M${x} ${y0} C${x - 40} ${y0 + h * .5} ${X} ${y0 + h * .3} ${X} ${y1} L${X} ${end}`
+  const rel = el => { const r = el.getBoundingClientRect(); return { t: r.top - mTop, b: r.bottom - mTop, l: r.left, r: r.right } }
+  const bowl = rel($('.bowl img')), cta = rel($('#kakao-cta'))
+  const mob = W < 768
+  const X = W - (mob ? 12 : Math.max(24, (W - 1120) / 2 - 8))
+  const x = (bowl.l + bowl.r) / 2, y0 = bowl.b - 24
+  const y1 = Math.min(y0 + 160, rel($('.marquee')).t - 4), h = y1 - y0
+  const ey = (cta.t + cta.b) / 2, turnY = ey - 90
+  let d = `M${x} ${y0} C${x - 40} ${y0 + h * .5} ${X} ${y0 + h * .3} ${X} ${y1}`
+  // 불투명 구간(재료·비용) 안에서는 꼬임이 가려지므로 그 아래로 미룸
+  const solid = $$('.ing-sec, .cost-sec').map(rel)
+  const gap = innerHeight * 1.3, R = mob ? 4.5 : 6, D = mob ? 13 : 18
+  let y = y1 + gap * .6, n = 0
+  while (y < turnY - 200) {
+    const hit = solid.find(s => y > s.t - 80 && y < s.b)
+    if (hit) { y = hit.b + 60; continue }
+    const L = loop(X, y, R, D, n % 2 ? 2 : 1)
+    if (y + L.h > turnY - 40) break
+    d += ` L${X} ${y}${L.s}`
+    y += L.h + gap; n++
+  }
+  d += ` L${X} ${turnY} C${X} ${ey - 30} ${X - 10} ${ey} ${cta.r - 4} ${ey}`
   nsvg.setAttribute('viewBox', `0 0 ${W} ${main.offsetHeight}`)
   nsvg.style.height = main.offsetHeight + 'px'
   npath.setAttribute('d', d)
   nTotal = npath.getTotalLength()
-  nSamples = Array.from({ length: 401 }, (_, i) => { const len = nTotal * i / 400; return { len, y: npath.getPointAtLength(len).y } })
+  nSamples = Array.from({ length: 801 }, (_, i) => { const len = nTotal * i / 800; return { len, y: npath.getPointAtLength(len).y } })
   npath.style.strokeDasharray = nTotal
 }
 
 // 스크롤에 따라 움직이는 것들
 const hero = $('.hero'), steps = $('.steps'), stepItems = $$('.steps li')
-const hd = $('.hd'), dock = $('.dock'), form = $('#form')
+const hd = $('.hd'), dock = $('.dock'), consult = $('#consult')
 const onScroll = () => {
   const vh = innerHeight
   hd.classList.toggle('on', scrollY > 10)
 
-  // 면발 선: 화면 아래쪽 90% 지점까지 그려짐
+  // 면발 선: 화면 아래쪽 90% 지점까지 그려짐 (꼬임 구간은 y가 되돌아가므로 처음 넘는 지점 기준)
   if (nTotal) {
     const target = scrollY + vh * .9 - (main.getBoundingClientRect().top + scrollY)
     const i = nSamples.findIndex(p => p.y > target)
@@ -87,33 +122,26 @@ const onScroll = () => {
     npath.style.strokeDashoffset = nTotal - len
   }
 
-  // 하단 버튼: 첫 화면 지나면 올라오고, 폼에서는 내려감
-  const fr = form.getBoundingClientRect()
-  dock.classList.toggle('on', hero.getBoundingClientRect().bottom < 0 && fr.top > vh * .6)
+  // 하단 버튼: 첫 화면 지나면 올라오고, 마지막 상담 구간에서는 내려감
+  dock.classList.toggle('on', hero.getBoundingClientRect().bottom < 0 && consult.getBoundingClientRect().top > vh * .6)
 
-  // 6단계 선 채우기
+  // 8단계 선 채우기
   const sr = steps.getBoundingClientRect()
   const p = clamp((vh * .7 - sr.top) / sr.height)
   steps.style.setProperty('--fill', p)
   stepItems.forEach((li, i) => li.classList.toggle('on', p >= i / stepItems.length))
-
-  // 재료 가로 이동
-  if (travel) {
-    const r = ing.getBoundingClientRect()
-    track.style.transform = `translateX(${-clamp(-r.top / travel) * travel}px)`
-  }
 }
 let ticking = false
 addEventListener('scroll', () => {
   if (!ticking) { ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false }) }
 }, { passive: true })
-const layout = () => { sizeIng(); buildNoodle(); onScroll() }
+const layout = () => { buildNoodle(); onScroll() }
 addEventListener('resize', layout)
 addEventListener('load', layout)
 document.fonts.ready.then(layout)
 layout()
 
-// ── 상담 폼: 검사 → (시트 저장) → 내용 복사 → 카카오톡 채널 채팅 열기 ──
+// ── 상담 폼(지금은 숨김): 검사 → (시트 저장) → 내용 복사 → 카카오톡 채널 채팅 열기 ──
 const f = $('#inquiry'), msg = $('.form-msg', f)
 const say = (t, ok) => { msg.textContent = t; msg.className = 'form-msg full ' + (ok ? 'ok' : 'err') }
 f.addEventListener('submit', async e => {

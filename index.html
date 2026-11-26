@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261125">
+<link rel="stylesheet" href="css/style.css?v=20261125c">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -25,12 +25,12 @@
   <a href="#top" class="hd-logo"><img src="img/logo.svg" alt="수유리우동집" width="476" height="99"></a>
   <nav class="hd-nav">
     <a href="tel:02-900-8805" class="hd-tel">02-900-8805</a>
-    <a href="#form" class="btn primary sm">창업 상담 신청</a>
+    <a href="#consult" class="btn primary sm js-kakao">카카오톡 상담하기</a>
   </nav>
 </header>
 
 <main id="top">
-  <!-- 면발 한 가닥: 그릇에서 상담 폼까지, 스크롤만큼 그려짐 (경로는 js가 만듦) -->
+  <!-- 면발 한 가닥: 그릇에서 카카오톡 상담 버튼까지, 스크롤만큼 그려짐 (경로는 js가 만듦) -->
   <svg class="noodle" aria-hidden="true"><path/></svg>
 
   <!-- 첫 화면 -->
@@ -40,7 +40,7 @@
         <h1 class="rise"><span>1984년부터 끓여온 육수,</span><span>이제 사장님 가게에서</span></h1>
         <p class="rise-p">직영점과 다점포 점주가 검증한 운영 방식으로 시작하세요.</p>
         <div class="hero-btns">
-          <a href="#form" class="btn primary">창업 상담 신청</a>
+          <a href="#consult" class="btn primary js-kakao">카카오톡 상담하기</a>
           <a href="tel:02-900-8805" class="btn line">02-900-8805 전화</a>
         </div>
       </div>
@@ -69,31 +69,18 @@
           <li>신규 가맹점 3개월 면 지원</li>
           <li>오픈 후 1년 마케팅 지원</li>
         </ul>
-        <p class="tiny">한정 프로모션 · 자세한 조건은 상담 때 안내해 드립니다</p>
+        <p class="tiny">한정 프로모션 · 업종 변경은 메인 간판 지원 · 자세한 조건은 상담 때 안내해 드립니다</p>
       </div>
     </div>
   </section>
 
-  <!-- 검증된 구조 -->
-  <section class="sec">
-    <div class="wrap">
-      <h2>한 매장이 잘되면<br>두 번째 매장을 냅니다</h2>
-      <p class="lead">수유리우동집에는 여러 매장을 함께 운영하는 점주가 많습니다.</p>
-      <ul class="multi">
-        <li><b>노원 · 상계 · 은행사거리 · 창동</b><span>4개 매장</span></li>
-        <li><b>광주 동천 · 서구청 · 일곡</b><span>3개 매장</span></li>
-        <li><b>원흥역 · 죽전보정</b><span>2개 매장</span></li>
-        <li><b>봉선 · 풍암</b><span>2개 매장</span></li>
-        <li><b>녹번역 · 연신내역</b><span>2개 매장</span></li>
-      </ul>
-      <div class="split">
-        <figure class="reveal"><img src="img/store.webp" alt="수유리우동집 이태원역점 매장" width="1400" height="788" loading="lazy"></figure>
-        <div class="split-txt">
-          <h3>본사가 직접 매장을 운영합니다</h3>
-          <p>여러 직영점을 본사가 직접 운영하며, 매달 쌓이는 데이터로 메뉴와 운영 방식을 먼저 검증합니다.</p>
-          <h3>불경기에도 찾는 한 끼</h3>
-          <p>학생·직장인·가족·1인 가구까지 부담 없이 찾는 면 요리라 경기에 덜 흔들립니다.</p>
-        </div>
+  <!-- 브랜드 이야기 -->
+  <section class="sec story">
+    <div class="wrap story-in">
+      <h2>물과 소금이 만나<br>한 그릇의 맛이 됩니다</h2>
+      <div>
+        <p>수유리우동집의 법인 이름은 '물과소금'입니다. 본사는 물처럼 든든한 기반이 되고, 가맹점은 소금처럼 현장에서 브랜드의 맛을 더합니다.</p>
+        <p>역할은 다르지만 함께할 때 하나의 맛이 됩니다. 본사와 가맹점이 서로의 동반자로 오래 함께 성장하는 것, 그것이 수유리우동집의 목표입니다.</p>
       </div>
     </div>
   </section>
@@ -117,19 +104,161 @@
     </div>
   </section>
 
-  <!-- 재료: 고정 후 가로 넘김 -->
+  <!-- 수익 구조 -->
+  <section class="sec">
+    <div class="wrap profit">
+      <div>
+        <h2>평균 매장의<br>한 달 수익 구조</h2>
+        <p class="lead">13평 평균 매장 기준, 매출에서 비용을 빼고 남는 돈을 그대로 보여 드립니다.</p>
+        <div class="profit-big"><span>월 수익</span><b>530만 원</b><em>매출의 20%</em></div>
+      </div>
+      <div>
+        <div class="bar" role="img" aria-label="월매출 2,650만 원 중 원재료비 38%, 인건비 20%, 임대료 12%, 기타 10%, 수익 20%">
+          <i style="--w:38%">원재료</i><i style="--w:20%">인건비</i><i style="--w:12%">임대료</i><i style="--w:10%">기타</i><i class="me" style="--w:20%">수익</i>
+        </div>
+        <table class="ptable">
+          <thead><tr><th>항목</th><th>금액</th><th>비율</th></tr></thead>
+          <tbody>
+            <tr><td>월매출</td><td>2,650만 원</td><td>100%</td></tr>
+            <tr><td>원재료비</td><td>1,007만 원</td><td>38%</td></tr>
+            <tr><td>인건비</td><td>530만 원</td><td>20%</td></tr>
+            <tr><td>임대료</td><td>318만 원</td><td>12%</td></tr>
+            <tr><td>기타</td><td>265만 원</td><td>10%</td></tr>
+          </tbody>
+          <tfoot><tr><td>월 수익</td><td>530만 원</td><td>20%</td></tr></tfoot>
+        </table>
+        <p class="src">창업 사이트 공개 자료(평균 매장, 13평) 기준 · 실제 수익은 운영 방식과 상권에 따라 다릅니다</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 검증된 구조 -->
+  <section class="sec">
+    <div class="wrap">
+      <h2>한 매장이 잘되면<br>두 번째 매장을 냅니다</h2>
+      <p class="lead">수유리우동집에는 여러 매장을 함께 운영하는 점주가 많습니다.</p>
+      <ul class="multi">
+        <li><b>노원 · 상계 · 은행사거리 · 창동</b><span>4개 매장</span></li>
+        <li><b>광주 동천 · 서구청 · 일곡</b><span>3개 매장</span></li>
+        <li><b>원흥역 · 죽전보정</b><span>2개 매장</span></li>
+        <li><b>봉선 · 풍암</b><span>2개 매장</span></li>
+        <li><b>녹번역 · 연신내역</b><span>2개 매장</span></li>
+      </ul>
+      <div class="split">
+        <figure class="reveal"><img src="img/store.webp" alt="수유리우동집 이태원역점 매장" width="1400" height="788" loading="lazy"></figure>
+        <div class="split-txt">
+          <h3>본사가 직접 매장을 운영합니다</h3>
+          <p>여러 직영점을 본사가 직접 운영하며, 매달 쌓이는 데이터로 메뉴와 운영 방식을 먼저 검증합니다.</p>
+          <h3>상권을 타지 않는 한 끼</h3>
+          <p>학생·직장인·가족·1인 가구까지 부담 없이 찾는 면 요리라, 작은 공간에서도 운영 효율이 높고 경기에 덜 흔들립니다.</p>
+          <h3>공간이 편해야 식사도 즐겁습니다</h3>
+          <p>언제 들어와도 부담 없는 아늑한 매장으로 꾸며 드립니다.</p>
+        </div>
+      </div>
+      <div class="ways">
+        <h3>매출이 들어오는 길은 네 가지</h3>
+        <ul><li>홀</li><li>포장</li><li>배달</li><li>단체 주문</li></ul>
+        <p>한 곳에 기대지 않아 계절·분기별 매출 걱정을 줄입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 재료 -->
   <section class="ing-sec" id="ing">
-    <div class="ing-sticky">
-      <div class="wrap ing-head">
+    <div class="wrap">
+      <div class="ing-head">
         <h2>편하지만,<br>정성은 그대로</h2>
         <p>액상 육수 대신 원물을 로스팅한 육수팩. 매장에서 우려낸 맛을 편하게 냅니다.</p>
       </div>
-      <div class="ing-track">
-        <figure><img src="img/noodle-raw.webp" alt="자사 생면" width="1400" height="1050" loading="lazy"><figcaption><b>자사 생면</b>호주산 밀, 본사 공장에서 직접</figcaption></figure>
-        <figure><img src="img/anchovy.webp" alt="멸치" width="1400" height="1050" loading="lazy"><figcaption><b>좋은 멸치만</b>골라서 로스팅</figcaption></figure>
-        <figure><img src="img/broth-pack.webp" alt="멸치 육수팩" width="1400" height="1050" loading="lazy"><figcaption><b>멸치 육수팩</b>비법 배합, 매장에서 깊은 육수를 편하게</figcaption></figure>
-        <figure><img src="img/udon-side.webp" alt="완성된 우동 한 그릇" width="1400" height="1050" loading="lazy"><figcaption><b>한 그릇</b>어느 매장이든 같은 맛</figcaption></figure>
+      <div class="ing-grid">
+        <figure class="tada"><img src="img/noodle-raw.webp" alt="자사 생면" width="1400" height="1050" loading="lazy"><figcaption><b>자사 생면</b>호주산 밀, 본사 공장에서 직접</figcaption></figure>
+        <figure class="tada"><img src="img/anchovy.webp" alt="남해 멸치" width="1400" height="1050" loading="lazy"><figcaption><b>남해 멸치</b>매년 통영 멸치 경매에서 구입</figcaption></figure>
+        <figure class="tada"><img src="img/broth-pack.webp" alt="멸치 육수팩" width="1400" height="1050" loading="lazy"><figcaption><b>멸치 육수팩</b>비법 배합, 매장에서 깊은 육수를 편하게</figcaption></figure>
+        <figure class="tada"><img src="img/udon-side.webp" alt="완성된 우동 한 그릇" width="1400" height="1050" loading="lazy"><figcaption><b>한 그릇</b>어느 매장이든 같은 맛</figcaption></figure>
       </div>
+    </div>
+  </section>
+
+  <!-- 메뉴 -->
+  <section class="sec">
+    <div class="wrap">
+      <h2>점심부터 저녁까지,<br>메뉴가 손님을 부릅니다</h2>
+      <p class="lead">우동·국수·김밥·돈까스·덮밥까지 한 곳에서. 손님 폭이 넓어 시간대마다 찾는 사람이 다릅니다.</p>
+      <div class="menu-pick">
+        <figure><img src="img/eomuk-cut.webp" alt="어묵우동" width="700" height="512" loading="lazy"><figcaption>어묵우동</figcaption></figure>
+        <figure><img src="img/spicy-cut.webp" alt="얼큰우동" width="700" height="526" loading="lazy"><figcaption>얼큰우동</figcaption></figure>
+        <figure><img src="img/janchi-cut.webp" alt="잔치국수" width="700" height="587" loading="lazy"><figcaption>잔치국수</figcaption></figure>
+      </div>
+      <dl class="menu-list">
+        <div><dt>김밥</dt><dd>수유김밥 · 스팸김밥 · 참치김밥 · 치즈김밥 · 돈까스김밥</dd></div>
+        <div><dt>면</dt><dd>우동 · 어묵우동 · 얼큰우동 · 김치우동 · 쫄면 · 짜장면 · 잔치국수 · 비빔국수 · 메밀비빔국수 · 열무국수 · 콩국수 · 냉모밀</dd></div>
+        <div><dt>식사</dt><dd>수유돈까스 · 치즈돈까스 · 제육덮밥 · 짜장덮밥 · 스팸김치볶음밥 · 소불고기볶음밥 · 비빔밥 · 사골떡만두국</dd></div>
+        <div><dt>분식</dt><dd>수유만두 · 갈비만두 · 새우만두 · 튀김만두 · 국물떡볶이</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 손님 리뷰 -->
+  <section class="sec review-sec">
+    <div class="wrap">
+      <h2>손님이 먼저<br>알아봅니다</h2>
+      <p class="lead">배달 앱과 지도 앱에 손님들이 직접 남긴 리뷰입니다. 옆으로 넘겨 보세요.</p>
+    </div>
+    <div class="reviews" tabindex="0" aria-label="손님 리뷰 모음">
+      <div class="rv-row">
+        <img src="img/review/r01.webp" alt="손님 리뷰 1" width="292" height="403" loading="lazy">
+        <img src="img/review/r02.webp" alt="손님 리뷰 2" width="292" height="403" loading="lazy">
+        <img src="img/review/r03.webp" alt="손님 리뷰 3" width="292" height="403" loading="lazy">
+        <img src="img/review/r04.webp" alt="손님 리뷰 4" width="292" height="403" loading="lazy">
+        <img src="img/review/r05.webp" alt="손님 리뷰 5" width="292" height="403" loading="lazy">
+        <img src="img/review/r06.webp" alt="손님 리뷰 6" width="292" height="403" loading="lazy">
+        <img src="img/review/r07.webp" alt="손님 리뷰 7" width="292" height="403" loading="lazy">
+        <img src="img/review/r08.webp" alt="손님 리뷰 8" width="292" height="403" loading="lazy">
+        <img src="img/review/r09.webp" alt="손님 리뷰 9" width="292" height="403" loading="lazy">
+        <img src="img/review/r10.webp" alt="손님 리뷰 10" width="292" height="403" loading="lazy">
+        <img src="img/review/r11.webp" alt="손님 리뷰 11" width="292" height="403" loading="lazy">
+      </div>
+      <div class="rv-row">
+        <img src="img/review/r12.webp" alt="손님 리뷰 12" width="292" height="330" loading="lazy">
+        <img src="img/review/r13.webp" alt="손님 리뷰 13" width="292" height="330" loading="lazy">
+        <img src="img/review/r14.webp" alt="손님 리뷰 14" width="292" height="330" loading="lazy">
+        <img src="img/review/r15.webp" alt="손님 리뷰 15" width="292" height="330" loading="lazy">
+        <img src="img/review/r16.webp" alt="손님 리뷰 16" width="292" height="330" loading="lazy">
+        <img src="img/review/r17.webp" alt="손님 리뷰 17" width="292" height="330" loading="lazy">
+        <img src="img/review/r18.webp" alt="손님 리뷰 18" width="292" height="330" loading="lazy">
+        <img src="img/review/r19.webp" alt="손님 리뷰 19" width="292" height="330" loading="lazy">
+        <img src="img/review/r20.webp" alt="손님 리뷰 20" width="292" height="330" loading="lazy">
+        <img src="img/review/r21.webp" alt="손님 리뷰 21" width="292" height="330" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 쉬운 운영 -->
+  <section class="sec easy-sec">
+    <div class="wrap">
+      <h2>처음 해도 손이<br>빨리 붙습니다</h2>
+      <ol class="easy">
+        <li><b>조리 5분 이내</b>재료가 원팩으로 와서 썰고 다듬는 일이 줄어듭니다.</li>
+        <li><b>김밥 재료 전처리</b>뛰어난 품질의 원팩 제품으로 점주님의 손을 덜어 드립니다.</li>
+        <li><b>멸치 육수팩</b>매일 매장에서 끓이는 육수를 일정한 맛으로, 편하게.</li>
+        <li><b>키오스크 무인 결제</b>주문·결제를 기계가 맡아 적은 인원으로 운영합니다.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 본사 지원 -->
+  <section class="sec support-sec">
+    <div class="wrap">
+      <h2>가맹본부 설립 이후<br>가맹점 분쟁 0건</h2>
+      <p class="lead">점주님의 목소리에 귀 기울이고, 함께 걷는 상생이 있었기에 가능했습니다.</p>
+      <ul class="support">
+        <li><b>디지털 소통 앱</b>수유리우동집 전용 앱으로 실시간 질문·답변, 매뉴얼 다운로드</li>
+        <li><b>매월 11일 상생데이</b>매달 가맹점과 혜택을 나누는 날</li>
+        <li><b>전담 슈퍼바이저</b>현장을 직접 찾아 1:1로 문제를 함께 해결</li>
+        <li><b>즉각 지원</b>간판·메뉴판 등 현장에 필요한 지원과 시설 보수를 빠르게</li>
+        <li><b>오픈 지원</b>오픈 전후 전담 슈퍼바이저가 영업 준비를 함께</li>
+        <li><b>마케팅 지원</b>블로그·체험단·영수증 리뷰 등 온·오프라인 홍보</li>
+      </ul>
     </div>
   </section>
 
@@ -152,18 +281,17 @@
     </div>
   </section>
 
-  <!-- 6단계 -->
-  <section class="sec steps-sec">
-    <div class="wrap">
-      <h2>상담부터 오픈 후까지</h2>
-      <ol class="steps">
-        <li><b>창업 상담</b>예산·희망 지역·운영 방식을 정리합니다.</li>
-        <li><b>상권·입지 분석</b>본사와 함께 후보지를 보고 매장 위치를 정합니다.</li>
-        <li><b>본사 교육 5일</b>본사 교육장에서 조리·운영 실습.</li>
-        <li><b>직영점 교육 5일</b>실제 매장에서 현장 실습.</li>
-        <li><b>오픈</b>표준 레시피와 간편 조리 방식으로 첫날부터 같은 맛.</li>
-        <li><b>오픈 후 지원</b>소통 프로그램으로 실시간 답변, 매월 상생데이.</li>
-      </ol>
+  <!-- 점주 인터뷰 -->
+  <section class="sec voice-sec">
+    <div class="wrap voice">
+      <div>
+        <h2>"창업하길 잘했어요"</h2>
+        <p class="lead">서울 단골에서 부산 점주로. 화명역점 하재호·노정림 점주님의 이야기입니다.</p>
+      </div>
+      <button class="yt" type="button" data-id="5crUqDouCQc" aria-label="화명역점 점주 인터뷰 영상 재생">
+        <img src="https://i.ytimg.com/vi/5crUqDouCQc/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+        <span class="yt-play" aria-hidden="true"></span>
+      </button>
     </div>
   </section>
 
@@ -173,7 +301,7 @@
       <div>
         <h2>창업 비용</h2>
         <p class="lead">13평 매장, 2025년 기준입니다.</p>
-        <p class="note">업종 변경은 3,200만 원~ (간판 지원)</p>
+        <p class="note">업종 변경은 3,200만 원~ (메인 간판 지원)</p>
       </div>
       <table>
         <thead><tr><th>구분</th><th>금액</th></tr></thead>
@@ -182,6 +310,7 @@
           <tr><td>교육비</td><td>500만 원</td></tr>
           <tr><td>보증금</td><td class="zero">0원</td></tr>
           <tr><td>설비·광고물</td><td>500만 원~</td></tr>
+          <tr><td>포스</td><td class="zero">0원</td></tr>
           <tr><td>주방·홀 집기</td><td>2,500만 원~</td></tr>
           <tr><td>인테리어</td><td>실측 후 안내</td></tr>
         </tbody>
@@ -190,12 +319,60 @@
     </div>
   </section>
 
-  <!-- 상담 폼 -->
-  <section class="sec form-sec" id="form">
+  <!-- 8단계 -->
+  <section class="sec steps-sec">
     <div class="wrap">
-      <h2>창업 상담 신청</h2>
-      <p class="lead">적어 주신 내용을 들고 카카오톡 상담방으로 바로 이어집니다.</p>
-      <form class="form" id="inquiry" novalidate>
+      <h2>상담부터 오픈까지 8단계</h2>
+      <ol class="steps">
+        <li><b>가맹 상담</b>예산·희망 지역·운영 방식을 정리합니다.</li>
+        <li><b>상권 분석</b>본사와 함께 후보지를 보고 매장 위치를 정합니다.</li>
+        <li><b>가맹 계약</b>계약서를 작성하고 전담 슈퍼바이저가 배정됩니다.</li>
+        <li><b>인테리어 시공</b>매장 콘셉트에 맞춰 시공합니다.</li>
+        <li><b>점주·직원 교육</b>본사 교육장 5일 + 직영점 5일.</li>
+        <li><b>집기·설비 세팅</b>주방 설비와 홀 집기를 설치합니다.</li>
+        <li><b>식자재 입고·최종 점검</b>첫 재료를 받고 오픈 전 모든 상황을 점검합니다.</li>
+        <li><b>그랜드 오픈</b>지역 홍보와 함께 본사가 오픈을 같이 진행합니다.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 가맹점 찾기 -->
+  <section class="sec find-sec">
+    <div class="wrap find">
+      <div>
+        <h2>가까운 수유리우동집에서<br>먼저 맛보세요</h2>
+        <p class="lead">서울·경기부터 부산·광주, 고속도로 휴게소까지. 상담 전에 직접 드셔 보시길 권합니다.</p>
+      </div>
+      <a class="btn line" href="https://xn--2q1bl4i14hv0ds7aft04mzvf.com/#move5" target="_blank" rel="noopener noreferrer">전국 매장 지도 보기</a>
+    </div>
+  </section>
+
+  <!-- 한눈에 보기 + 카카오톡 상담 -->
+  <section class="sec consult-sec" id="consult">
+    <div class="wrap">
+      <p class="eyebrow-serif">수제우동의 100년을 꿈꾸며</p>
+      <h2>왜 수유리우동집인가,<br>한눈에 보기</h2>
+      <table class="why">
+        <thead><tr><th>가맹 계약 전 확인할 것</th><th>수유리우동집</th></tr></thead>
+        <tbody>
+          <tr><td>본사가 직접 매장을 운영하나요?</td><td>다수 직영점 운영</td></tr>
+          <tr><td>한 점주가 여러 매장을 하나요?</td><td>노원·상계 등 다점포 점주 다수</td></tr>
+          <tr><td>핵심 재료를 본사가 만드나요?</td><td>자사 생면 공장 · 멸치 육수팩</td></tr>
+          <tr><td>상권을 함께 봐 주나요?</td><td>상담 단계부터 상권·입지 분석</td></tr>
+          <tr><td>교육은 충분한가요?</td><td>본사 5일 + 직영점 5일</td></tr>
+          <tr><td>오픈 후에도 챙기나요?</td><td>전담 슈퍼바이저 · 매월 상생데이 · 소통 앱</td></tr>
+          <tr><td>본사와 다툼은 없었나요?</td><td>가맹점 분쟁 0건</td></tr>
+          <tr><td>지금 시작하면 혜택이 있나요?</td><td>최대 1,500만 원 지원</td></tr>
+        </tbody>
+      </table>
+      <div class="consult-cta">
+        <a href="#consult" class="btn primary js-kakao" id="kakao-cta">카카오톡 상담하기</a>
+        <a href="tel:02-900-8805" class="btn line">02-900-8805 전화</a>
+      </div>
+      <p class="tiny consult-note">카카오톡 채팅방에서 희망 지역과 예산을 알려 주시면 담당자가 바로 답변드립니다.</p>
+
+      <!-- 상담 폼: 당분간 숨김 (카카오톡 상담으로 대체) -->
+      <form class="form" id="inquiry" novalidate hidden>
         <label class="field">성함<input name="name" autocomplete="name" required></label>
         <label class="field">연락처<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required></label>
         <label class="field">창업 희망 지역<input name="area" placeholder="예: 서울 노원구" required></label>
@@ -235,9 +412,9 @@
 
 <div class="dock" aria-hidden="true">
   <a href="tel:02-900-8805" class="btn line" tabindex="-1">전화</a>
-  <a href="#form" class="btn primary" tabindex="-1">창업 상담 신청</a>
+  <a href="#consult" class="btn primary js-kakao" tabindex="-1">카카오톡 상담하기</a>
 </div>
 
-<script src="js/main.js?v=20261125" defer></script>
+<script src="js/main.js?v=20261125b" defer></script>
 </body>
 </html>
