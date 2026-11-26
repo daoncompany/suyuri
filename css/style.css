@@ -28,7 +28,7 @@ h3{font-size:19px;font-weight:600;line-height:1.4}
 .promo,.cost-sec,.ft{--soy-60:#5C4A1F;--scallion:#3B5E27}
 
 /* 버튼 */
-.btn{display:inline-flex;align-items:center;justify-content:center;height:54px;padding:0 28px;border-radius:999px;font-weight:600;font-size:17px;border:1.5px solid var(--seal);transition:background .2s,color .2s,border-color .2s;cursor:pointer;font-family:var(--sans)}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;height:54px;padding:0 28px;border-radius:999px;font-weight:600;font-size:17px;border:1.5px solid var(--seal);transition:background .2s,color .2s,border-color .2s;cursor:pointer;font-family:var(--sans)}
 .btn.primary{background:var(--seal);color:#fff}
 .btn.line{border-color:var(--soy);color:var(--soy)}
 .btn.sm{height:40px;padding:0 18px;font-size:15px}
@@ -315,15 +315,13 @@ tfoot td{border-bottom:2px solid var(--soy);font-family:var(--serif);font-weight
   .hd-logo img{height:32px}
   .hd-tel,.hd-nav .btn{display:inline-flex}
   .hero{padding-top:72px}
-  .hero-in{grid-template-columns:1.15fr 1fr;align-items:center;gap:40px}
-  .hero h1{font-size:48px}
+  .hero h1{font-size:40px}
+  .bowl{max-width:560px;margin-left:auto;margin-right:auto}
   .hero-txt p{font-size:19px}
   .hero-btns{display:flex}
   .hero-btns .line{display:inline-flex}
-  .bowl{margin:40px 0 0}
-  .promo{grid-template-columns:auto 1fr;padding:40px 48px;gap:24px 64px;align-items:center}
+  .promo{padding:40px 48px}
   .amt b{font-size:56px}
-  .promo .tiny{grid-column:2}
   .multi li{padding:20px 0}
   .multi b{font-size:22px}
   .split{grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
@@ -331,7 +329,6 @@ tfoot td{border-bottom:2px solid var(--soy);font-family:var(--serif);font-weight
   .sales{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
   .sale b{font-size:24px}
   .ing-grid{grid-template-columns:repeat(4,1fr);gap:20px}
-  .story-in{grid-template-columns:1fr 1.2fr;gap:64px}
   .profit{grid-template-columns:1fr 1.3fr;gap:64px;align-items:start}
   .profit-big b{font-size:64px}
   .ways{display:grid;grid-template-columns:auto 1fr;gap:4px 32px;align-items:center;padding:32px 40px}
@@ -340,7 +337,7 @@ tfoot td{border-bottom:2px solid var(--soy);font-family:var(--serif);font-weight
   .rv-row img{width:250px}
   .mq-track{font-size:19px}
   .menu-list div{grid-template-columns:120px 1fr;padding:18px 0}
-  .easy{grid-template-columns:repeat(4,1fr);gap:32px;border-top:0}
+  .easy{grid-template-columns:1fr 1fr;gap:8px 32px;border-top:0}
   .easy li{border-top:2px solid var(--soy);border-bottom:0}
   .easy li::after{top:-2px;height:3px}
   .support{grid-template-columns:1fr 1fr;column-gap:56px}
@@ -352,7 +349,7 @@ tfoot td{border-bottom:2px solid var(--soy);font-family:var(--serif);font-weight
   .consult-cta{display:flex;justify-content:center}
   .consult-cta .line{order:-1}
   .edu{grid-template-columns:1fr 1fr;gap:32px}
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 32px;padding-left:0}
+  .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 32px;padding-left:0}
   .steps::before{display:none}
   .steps li::after{display:block}
   .steps li{padding:48px 0 0;border-top:2px solid var(--line)}
@@ -364,6 +361,18 @@ tfoot td{border-bottom:2px solid var(--soy);font-family:var(--serif);font-weight
   .form .btn{width:auto;justify-self:start;padding:0 48px}
   .ft{padding-bottom:56px}
   .dock{display:none}
+}
+
+/* 넓은 PC(1024~): 첫 화면 두 칸, 프로모션 가로, 4칸 */
+@media (min-width:1024px){
+  .hero-in{grid-template-columns:1.15fr 1fr;align-items:center;gap:40px}
+  .hero h1{font-size:clamp(38px,3.8vw,48px)}
+  .bowl{max-width:none;margin:40px 0 0}
+  .promo{grid-template-columns:auto 1fr;gap:24px 64px;align-items:center}
+  .promo .tiny{grid-column:2}
+  .easy{grid-template-columns:repeat(4,1fr);gap:32px}
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .story-in{grid-template-columns:1fr 1.2fr;gap:64px}
 }
 
 @media (prefers-reduced-motion:reduce){

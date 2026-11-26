@@ -71,12 +71,12 @@ lb.addEventListener('click', () => lb.close())
 $$('.easy li').forEach((li, i) => li.style.setProperty('--i', i))
 $$('.steps li').forEach((li, i) => li.style.setProperty('--i', i))
 
-// 가맹점 지도: 구간에 가까워지면 지도 라이브러리(Leaflet)와 매장 목록을 불러옴. 키 필요 없음
+// 가맹점 지도: 구간에 가까워지면 지도 라이브러리(Leaflet 1.9.4, vendor/ 자체 보관)와 매장 목록을 불러옴. 키 필요 없음
 const esc = s => String(s).replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]))
 const loadScript = src => new Promise((ok, no) => document.head.appendChild(Object.assign(document.createElement('script'), { src, onload: ok, onerror: no })))
 once([$('#stores')], async () => {
-  document.head.appendChild(Object.assign(document.createElement('link'), { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css' }))
-  const [stores] = await Promise.all([fetch('data/stores.json').then(r => r.json()), loadScript('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js')])
+  document.head.appendChild(Object.assign(document.createElement('link'), { rel: 'stylesheet', href: 'vendor/leaflet/leaflet.css' }))
+  const [stores] = await Promise.all([fetch('data/stores.json').then(r => r.json()), loadScript('vendor/leaflet/leaflet.js')])
   $('.store-count').textContent = stores.length
   const map = L.map('map', { scrollWheelZoom: false }).fitBounds(L.latLngBounds(stores.map(s => s.c)).pad(.05))
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
