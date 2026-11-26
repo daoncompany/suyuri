@@ -212,8 +212,24 @@ main{position:relative;z-index:0}
 .yt-play::after{content:"";position:absolute;left:29px;top:15px;width:18px;height:20px;background:#fff;clip-path:polygon(0 0,100% 50%,0 100%)}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
-/* 가맹점 찾기 */
-.find{display:grid;gap:4px;justify-items:start}
+/* 가맹점 찾기: 지도 + 목록 */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.finder{display:grid;gap:16px}
+.map{height:340px;border-radius:6px;border:1px solid var(--line);background:#EAE6DA;z-index:0}
+.finder-search input{width:100%;height:50px;border:1px solid var(--soy-60);border-radius:999px;background:#fff;padding:0 20px;font:400 16px var(--sans);color:var(--soy)}
+.finder-search input:focus{outline:3px solid #C4261D40;border-color:var(--seal)}
+.store-list{list-style:none;margin-top:12px;max-height:380px;overflow-y:auto;border-top:1px solid var(--soy);overscroll-behavior:contain}
+.store-list li{padding:14px 4px;border-bottom:1px solid var(--line);font-size:14px;color:var(--soy-60);cursor:pointer}
+.store-list li.on{background:#fff8}
+.store-list b{display:block;font-size:16px;color:var(--soy)}
+.store-list .meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px}
+.store-list a{color:var(--soy);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.store-list .empty{cursor:default}
+/* 지도 위 표시: 인장 빨강 동그라미 */
+.pin{display:block;width:18px;height:18px;border-radius:50%;background:var(--seal);border:3px solid #fff;box-sizing:border-box}
+.pin.on{width:26px;height:26px;background:var(--soy)}
+.leaflet-popup-content{font:14px/1.5 var(--sans);color:var(--soy);margin:12px 14px}
+.leaflet-popup-content b{display:block;font-size:15px}
 
 /* 한눈에 + 카카오톡 */
 .consult-sec{background:#fff6;border-top:1px solid var(--line)}
@@ -329,7 +345,9 @@ tfoot td{border-bottom:2px solid var(--soy);font-family:var(--serif);font-weight
   .easy li::after{top:-2px;height:3px}
   .support{grid-template-columns:1fr 1fr;column-gap:56px}
   .voice{grid-template-columns:1fr 1.4fr;gap:56px;align-items:center}
-  .find{grid-template-columns:1fr auto;align-items:center;gap:40px}
+  .finder{grid-template-columns:1.5fr 1fr;gap:24px;align-items:start}
+  .map{height:560px}
+  .store-list{max-height:490px}
   .why td{font-size:17px}
   .consult-cta{display:flex;justify-content:center}
   .consult-cta .line{order:-1}

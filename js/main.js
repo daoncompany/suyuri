@@ -71,6 +71,41 @@ lb.addEventListener('click', () => lb.close())
 $$('.easy li').forEach((li, i) => li.style.setProperty('--i', i))
 $$('.steps li').forEach((li, i) => li.style.setProperty('--i', i))
 
+// 가맹점 지도: 구간에 가까워지면 지도 라이브러리(Leaflet)와 매장 목록을 불러옴. 키 필요 없음
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]))
+const loadScript = src => new Promise((ok, no) => document.head.appendChild(Object.assign(document.createElement('script'), { src, onload: ok, onerror: no })))
+once([$('#stores')], async () => {
+  document.head.appendChild(Object.assign(document.createElement('link'), { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css' }))
+  const [stores] = await Promise.all([fetch('data/stores.json').then(r => r.json()), loadScript('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js')])
+  $('.store-count').textContent = stores.length
+  const map = L.map('map', { scrollWheelZoom: false }).fitBounds(L.latLngBounds(stores.map(s => s.c)).pad(.05))
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map)
+  const icon = on => L.divIcon({ className: '', html: `<span class="pin${on ? ' on' : ''}"></span>`, iconSize: on ? [26, 26] : [18, 18] })
+  const popup = s => `<b>수유리우동집 ${esc(s.n)}</b>${esc(s.a)}${s.t ? `<br><a href="tel:${esc(s.t)}">${esc(s.t)}</a>` : ''}`
+  let cur = null
+  const list = $('.store-list')
+  const pick = (s, fly) => {
+    if (cur) cur.m.setIcon(icon(false))
+    cur = s; s.m.setIcon(icon(true)).setZIndexOffset(1000).openPopup()
+    if (fly) map.flyTo(s.c, 15, { duration: calm ? 0 : .8 })
+    $$('li', list).forEach(li => li.classList.toggle('on', li.dataset.i == stores.indexOf(s)))
+  }
+  stores.forEach(s => { s.m = L.marker(s.c, { icon: icon(false), title: s.n }).addTo(map).bindPopup(popup(s)); s.m.on('click', () => pick(s)) })
+  const render = q => {
+    const hit = stores.filter(s => !q || (s.n + s.a).includes(q))
+    list.innerHTML = hit.length ? hit.map(s => `<li data-i="${stores.indexOf(s)}" tabindex="0"><b>${esc(s.n)}</b>${esc(s.a)}<span class="meta">${s.t ? `<a href="tel:${esc(s.t)}">${esc(s.t)}</a>` : ''}${s.h && s.h !== '-' ? `<span>${esc(s.h)}</span>` : ''}<a href="${esc(s.u)}" target="_blank" rel="noopener noreferrer">네이버 지도</a></span></li>`).join('')
+      : '<li class="empty">찾는 매장이 없습니다. 지역 이름으로 다시 찾아보세요.</li>'
+    if (q && hit.length) map.flyToBounds(L.latLngBounds(hit.map(s => s.c)).pad(.2), { maxZoom: 14, duration: calm ? 0 : .8 })
+  }
+  render('')
+  list.addEventListener('click', e => { const li = e.target.closest('li[data-i]'); if (li && !e.target.closest('a')) pick(stores[li.dataset.i], true) })
+  list.addEventListener('keydown', e => { const li = e.target.closest('li[data-i]'); if (li && e.key === 'Enter') pick(stores[li.dataset.i], true) })
+  let tm; $('.finder-search input').addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => render(e.target.value.trim()), 200) })
+  layout()
+}, '600px 0px')
+
 // 재료: 제자리에서 하나씩 tada
 $$('.tada').forEach((el, i) => el.style.setProperty('--i', i))
 once($$('.ing-grid'), g => $$('.tada', g).forEach(el => el.classList.add('in')))
